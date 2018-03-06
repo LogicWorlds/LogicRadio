@@ -109,15 +109,15 @@ footer {
 	height: 9em;
 }
 .playEffect {
-	position: relative;
+	position: fixed;
 	display: flex;
 	margin: auto;
 	padding: 10px;
-	width: 100px;
-	height: 100px;
+	width: 10em;
+	height: 10em;
 	border-radius: 5em;
 	opacity: 0;
-	border:solid 20px #69d84d;
+	border: solid 20px #69d84d;
 }
 .startAnimate {
 	animation: playRadio 2s linear;

@@ -125,3 +125,8 @@ item.onmousedown = function(e){
    		document.onmousemove = document.onmouseup = null;
    }
 }
+
+//Правка центра эффекта
+$(window).on('scroll',function(){
+    $('.playEffect').css("margin-top", -$(this).scrollTop());
+});
