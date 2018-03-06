@@ -2,7 +2,12 @@
 
 body {
     font-family: 'Montserrat Alternates', sans-serif;
-    background-image: url("images/bg.png");
+
+    background: url('images/bg.png') 0 10% fixed;
+    background-position-x: 0px;
+    background-position-y: 10%;
+    background-position: center center;
+    margin: 0;
 }
 
 .navColors {
@@ -80,68 +85,68 @@ footer {
 
 /* by Yaroslavik */
 .playerBox {
-	position: relative;
-	display: flex;
-	margin: auto;
-	height: 10em;
+    position: relative;
+    display: flex;
+    margin: auto;
+    height: 10em;
 }
 .player {
-	position: relative;
-	display: flex;
+    position: relative;
+    display: flex;
     flex: none;
-	margin: auto;
-	width: 10em;
-	height: 10em;
-	background: url('images/Play.png');
-	background-size: 100% 100%;
-	transition: 0.2s;
-	border-radius: 5em;
+    margin: auto;
+    width: 10em;
+    height: 10em;
+    background: url('images/Play.png');
+    background-size: 100% 100%;
+    transition: 0.2s;
+    border-radius: 5em;
 }
 .pause {
-	background: url('images/Pause.png');
-	background-size: 100% 100%;
+    background: url('images/Pause.png');
+    background-size: 100% 100%;
 }
 .player:hover {
-	box-shadow: 0 0 10px #69d84d;
+    box-shadow: 0 0 10px #69d84d;
 }
 .player:active {
-	width: 9em;
-	height: 9em;
+    width: 9em;
+    height: 9em;
 }
 .playEffect {
-	position: fixed;
-	display: flex;
-	margin: auto;
-	padding: 10px;
-	width: 10em;
-	height: 10em;
-	border-radius: 5em;
-	opacity: 0;
-	border: solid 20px #69d84d;
+    position: fixed;
+    display: flex;
+    margin: auto;
+    padding: 10px;
+    width: 10em;
+    height: 10em;
+    border-radius: 5em;
+    opacity: 0;
+    border: solid 20px #69d84d;
 }
 .startAnimate {
-	animation: playRadio 2s linear;
+    animation: playRadio 2s linear;
 }
 .startPauseAnimation {
-	animation: playRadio 0.5s linear reverse;
+    animation: playRadio 0.5s linear reverse;
 }
 @keyframes playRadio {
-	0% {
-		opacity:0;
-		transform: scale(1);
-	}
-	50% {
-		opacity: 0.5;
-	}
-	100% {
-		opacity: 0;
-		transform: scale(15);
-	}
+    0% {
+        opacity:0;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(15);
+    }
 }
 
 .tablePlayer {
-	display: flex;
-	margin: auto;
+    display: flex;
+    margin: auto;
 }
 
 #slider {
@@ -163,4 +168,3 @@ footer {
     border-radius: 20px;
     border: 1px solid #a4a4a4;
 }
-
