@@ -71,7 +71,12 @@ footer {
     color: #03BE56;
 }
 
-
+.filter-invert {
+    filter: invert(50%);
+}
+.img-green {
+    filter: hue-rotate(100deg);
+}
 
 /* by Yaroslavik */
 .playerBox {
@@ -158,9 +163,4 @@ footer {
     border-radius: 20px;
     border: 1px solid #a4a4a4;
 }
-.filter-invert {
-    filter: invert(50%);
-}
-.img-green {
-    filter: hue-rotate(100deg);
-}
+
