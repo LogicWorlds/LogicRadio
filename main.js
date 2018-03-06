@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", ready);
 
-var API_URL = "http://logicworld.ru:8000/status-json.xsl"; //Адрес API
-var audio = new Audio('http://logicworld.ru:8000/live.mp3'); //Основной поток
+var API_URL = "https://logicworld.ru/icecast/status-json.xsl"; //Адрес API
+var audio = new Audio('https://logicworld.ru/icecast/live.mp3'); //Основной поток
 audio.volume = 0.1; //Default volume
 audio.load();
 var settings = {};
@@ -95,6 +95,7 @@ var sliderClientCoords = slider.getBoundingClientRect();
 var sliderCoords = {};
 sliderCoords.top = sliderClientCoords.top + pageYOffset;
 sliderCoords.left = sliderClientCoords.left + pageXOffset;
+cordsFix();
 
 item.onmousedown = function(e){
 	 item.ondragstart = function() {
@@ -124,6 +125,13 @@ item.onmousedown = function(e){
    document.onmouseup = function(){
    		document.onmousemove = document.onmouseup = null;
    }
+}
+
+function cordsFix() {
+	sliderCoords.top = sliderClientCoords.top + pageYOffset;
+	sliderCoords.left = sliderClientCoords.left + pageXOffset;
+	sliderClientCoords = slider.getBoundingClientRect();
+	setTimeout("cordsFix();", 500);
 }
 
 //Правка центра эффекта
