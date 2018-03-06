@@ -3,12 +3,10 @@
 body {
     font-family: 'Montserrat Alternates', sans-serif;
 
-    background: url('images/bg.png') 0 10% fixed;
-    background-position-x: 0px;
-    background-position-y: 10%;
-    background-position: center center;
-    background-size: 100% 100%, auto;
-    margin: 0;
+    background: url('images/bg.png') fixed;
+	background-position: center center;
+    background-size: auto 100%;
+	margin: 0;
 }
 
 .navColors {
