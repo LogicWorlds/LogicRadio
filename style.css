@@ -7,6 +7,7 @@ body {
     background-position-x: 0px;
     background-position-y: 10%;
     background-position: center center;
+    background-size: 100% 100%, auto;
     margin: 0;
 }
 
