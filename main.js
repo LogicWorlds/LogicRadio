@@ -22,16 +22,22 @@ function syncRadioStart(radioInfo) {
 		return;
 	}
 	var chenelsInfo = radioInfo['icestats']['source']
+		
 	if(chenelsInfo[settings[chenel]]['stream_start'] == null){
 		chenel = 'lastChenel';
 		if(chenelsInfo[settings[chenel]]['stream_start'] == null){
-			$('#debug').html('Ни один поток радио не доступен!');
-			return;
+			$('#debug').html('Ни один поток радио не доступен! (Попытка получить название из корня)');
+			chenel = 'noCh';
 		}
 	}
 
 	//Установка данных на места плейсхолдеров
-	var chenelInfo = radioInfo['icestats']['source'][settings[chenel]];
+	var chenelInfo;
+	if(chenel != 'noCh') {
+		chenelInfo = radioInfo['icestats']['source'][settings[chenel]];
+	} else {
+		chenelInfo = radioInfo['icestats']['source'];
+	}
 	Replaces("#streamName", chenelInfo['server_name']);
 	Replaces("#currentSong", chenelInfo['title']);
 	Replaces("#serverDescription", chenelInfo['server_description']?chenelInfo['server_description']:'');
@@ -67,7 +73,8 @@ function getServerInfo(){
 //Проигрыватель
 function playRadio(){
 	if(audio.paused) {
-		audio.play();
+		audio.load();
+		setTimeout("audio.play();", 500);
 		$('.player').addClass('pause');
 
 			$('.playEffect').removeClass('startPauseAnimation');
@@ -77,7 +84,6 @@ function playRadio(){
 
 	} else {
 		audio.pause();
-		audio.load();
 		$('.player').removeClass('pause');
 			$('.playEffect').removeClass('startAnimate');
 			$('.playEffect').addClass('startPauseAnimation');
