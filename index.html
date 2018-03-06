@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>LogicRadio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> <!-- Bootstrap -->
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> <!-- jquery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> <!-- Bootstrap script -->
+        <link rel="stylesheet" href="style.css"> <!-- Стили -->
+        <script src="main.js" type="text/javascript" defer></script> <!-- Скрипт радио и слайдера -->
+        <script type="text/javascript" src="https://vk.com/js/api/openapi.js?152"></script> <!-- скрипт ВК -->
+        <script type="text/javascript"> <!-- Ин ВК -->
+              VK.init({apiId: 6397657, onlyWidgets: true});
+        </script>
+    </head>
+    <body>
+        <header class="w-100"> <!-- Верхняя панель с лого -->
+            <nav class="navbar nav-pills nav-justified navColors">
+                <div class="navbar-default">
+                    <a href="https://logicworld.ru/" class="nav-link" onclick="">
+                        <img src="images/left-arrow.png" class="img-responsive filter-invert img-h-80 img-green " style="opacity: 0.5;" alt="back-arrow">
+                    </a>
+                </div>
+                <div class="navbar-brand mx-auto">
+                    <a id="MainText" href="" class="font-exo2 text-LogicGreen "> <!-- Ссылка на этот сайт !!! НЕ ЗАБЫТЬ ВПИСАТЬ САЙТ !!! -->
+                        <img src="images/LRadio3.png" alt="LogicRadio" class="img-responsive img-h-80"> <!-- Логотип -->
+                    </a>
+                </div>
+                <div class="navbar-default" style=" width: 110px; ">
+                    <a href="#" class="nav-link text-LogicGreen"></a>
+                </div>
+            </nav>
+        </header>
+        <div class="container pt-4 pb-1"> <!-- Основной контейнер -->
+            <div id="audio-player" class="row p-3 mx-auto">  <!-- Контейнер с плеером -->
+                <ul id="infoLeft" class="col-lg-5 mt-4"> <!-- Левая сторона -->
+                    <li class="h-75">
+                        Название стрима: <span id="streamName">...</span>
+                    </li>
+                    <li class="align-text-bottom">
+                        Описание: <span id="serverDescription">...</span>
+                    </li>
+                </ul>
+                <div class='col-lg-2 playerBox' onclick="playRadio();"> <!-- Кнопка радио -->
+                    <div class="player">
+                        <div class='playEffect'></div>
+                    </div>
+                </div>
+                <ul id="infoRight" class="d-block col-lg-5 mt-4"> <!-- Правая сторона -->
+                    <li class="h-75">
+                        Играет: <span id="currentSong">...</span>
+                    </li>
+                    <li class="">
+                        Слушателей: <span id="currentListenersCount">...</span>
+                    </li>
+                </ul>
+                <div class="row-lg-6 mx-auto"> <!-- Слайдер громкости -->
+                        <div id="slider"> <!-- Линия слайдера -->
+                            <div id="item"></div> <!-- Фигулька, которую тянут -->
+                        </div>
+                        <div id="result">10%</div> <!-- Процент громкости -->
+                        <!-- <input type="range" min="1" max="100" step="1" name="volume" ondragend="SetVolume();"> --> <!-- Недоползунок -->
+                </div>
+            </div>
+            <div id="chatBox" class="pt-5"> <!-- Чат -->
+                <div id="vk_comments" class="mx-auto"></div>
+                <script type="text/javascript">
+                    VK.Widgets.Comments("vk_comments", {limit: 20, attach: '*'});
+                </script>
+            </div>
+        </div>
+        <footer class="w-100 text-center text-sm position-relative p-2"> <!-- Подвал -->
+            <hr>(C) 2018 LogicWorld
+        </footer>
+    </body>
+</html>
