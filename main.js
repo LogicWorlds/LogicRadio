@@ -71,10 +71,12 @@ function getServerInfo(){
 }
 
 //Проигрыватель
+audio.load();
+audio.play();
+audio.muted=true;
 function playRadio(){
-	if(audio.paused) {
-		audio.load();
-		setTimeout("audio.play();", 500);
+	if(audio.muted) {
+		audio.muted=false;
 		$('.player').addClass('pause');
 
 			$('.playEffect').removeClass('startPauseAnimation');
@@ -83,7 +85,7 @@ function playRadio(){
 				setTimeout("$('.playEffect').removeClass('startAnimate');", 2000);
 
 	} else {
-		audio.pause();
+		audio.muted=true;
 		$('.player').removeClass('pause');
 			$('.playEffect').removeClass('startAnimate');
 			$('.playEffect').addClass('startPauseAnimation');
