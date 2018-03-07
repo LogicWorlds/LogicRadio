@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", ready);
 
 var API_URL = "https://logicworld.ru/icecast/status-json.xsl"; //Адрес API
 var audio = new Audio('https://logicworld.ru/icecast/live.mp3'); //Основной поток
-audio.volume = 0.1; //Default volume
+//audio.volume = 0.1; //Default volume
 audio.load();
 var settings = {};
 settings.firstChenel = 0; //Основной канал
@@ -93,51 +93,11 @@ function playRadio(){
 	}
 }
 //Ползунок громкости
-var slider = document.getElementById('slider');
-var item = slider.querySelector('#item');
-var result = document.getElementById('result');
-
-var sliderClientCoords = slider.getBoundingClientRect();
-var sliderCoords = {};
-sliderCoords.top = sliderClientCoords.top + pageYOffset;
-sliderCoords.left = sliderClientCoords.left + pageXOffset;
-cordsFix();
-
-item.onmousedown = function(e){
-	 item.ondragstart = function() {
-      return false;
-   };
-
-   var itemClientCoords = item.getBoundingClientRect();
-   var itemCoords = {};
-   itemCoords.top = itemClientCoords.top + pageYOffset;
-	 itemCoords.left = itemClientCoords.left + pageXOffset;
-
-   var right = slider.offsetWidth - item.offsetWidth;
-
-   var shiftX = e.pageX - itemCoords.left;
-
-   document.onmousemove = function(e){
-   		var newLeft = e.pageX - sliderCoords.left - shiftX;
-      if(newLeft < 0) newLeft = 0;
-      if(newLeft > right) newLeft = right;
-      item.style.left = newLeft + 'px';
-      result.innerHTML = Math.round(newLeft / right * 100) + '%';
-
-      audio.volume = newLeft / right;//Громкость
-	  return false;
-   }
-
-   document.onmouseup = function(){
-   		document.onmousemove = document.onmouseup = null;
-   }
-}
-
-function cordsFix() {
-	sliderCoords.top = sliderClientCoords.top + pageYOffset;
-	sliderCoords.left = sliderClientCoords.left + pageXOffset;
-	sliderClientCoords = slider.getBoundingClientRect();
-	setTimeout("cordsFix();", 500);
+SetVolume();
+function SetVolume() {
+	var inpRange = document.getElementById("slider").value;
+	audio.volume = inpRange / 100;
+	$('#result').html(inpRange + '%');
 }
 
 //Правка центра эффекта

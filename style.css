@@ -4,9 +4,9 @@ body {
     font-family: 'Montserrat Alternates', sans-serif;
 
     background: url('images/bg.png') fixed;
-	background-position: center center;
+    background-position: center center;
     background-size: auto 100%;
-	margin: 0;
+    margin: 0;
 }
 
 .navColors {
@@ -157,6 +157,93 @@ footer {
     margin-top: 10px;
     border: 1px solid #dbdbdb;
 }
+
+/*Полоса ползунка*/
+#slider[type=range] {
+  -webkit-appearance: none; /* Скрывает слайдер, чтобы можно было создать свой */
+}
+/* Специальные правила для браузеров на движках WebKit/Blink */
+#slider[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #ccc;
+  height: 15px;
+  width: 15px;
+  border-radius: 5em;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -5px; /* Вам нужно указать значение для поля в Chrome, но в Firefox и IE это происходит автоматически */
+}
+/* Тоже самое для Firefox */
+#slider[type=range]::-moz-range-thumb {
+  border: 1px solid #ccc;
+  height: 15px;
+  width: 15px;
+  border-radius: 5em;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+/* Тоже самое для IE */
+#slider[type=range]::-ms-thumb {
+  border: 1px solid #ccc;
+  height: 15px;
+  width: 15px;
+  border-radius: 5em;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+
+/*Полоса диапазона*/
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  background: #eee;
+  border-radius: 1.3px;
+  border: 0.2px solid #ccc;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  background: #eee;
+  border-radius: 1.3px;
+  border: 0.2px solid #ccc;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #eee;
+  border: 0.2px solid #ccc;
+  border-radius: 2.6px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #eee;
+}
+input[type=range]::-ms-fill-upper {
+  background: #eee;
+  border: 0.2px solid #ccc;
+  border-radius: 2.6px;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #eee;
+}
+
 #item {
     width: 13px;
     height: 13px;

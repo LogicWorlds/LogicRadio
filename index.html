@@ -8,8 +8,8 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> <!-- jquery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> <!-- Bootstrap script -->
-        <link rel="stylesheet" href="style.css?v=2"> <!-- Стили -->
-        <script src="main.js?v=2" type="text/javascript" defer></script> <!-- Скрипт радио и слайдера -->
+        <link rel="stylesheet" href="style.css?v=5"> <!-- Стили -->
+        <script src="main.js?v=5" type="text/javascript" defer></script> <!-- Скрипт радио и слайдера -->
         <script type="text/javascript" src="https://vk.com/js/api/openapi.js?152"></script> <!-- скрипт ВК -->
         <script type="text/javascript"> <!-- Инициализация виджета ВК -->
               VK.init({apiId: 6221173, onlyWidgets: true});
@@ -57,10 +57,8 @@
                     </li>
                 </ul>
                 <div class="row-lg-6 mx-auto"> <!-- Слайдер громкости -->
-                        <div id="slider"> <!-- Линия слайдера -->
-                            <div id="item"></div> <!-- Фигулька, которую тянут -->
-                        </div>
-                        <div id="result">10%</div> <!-- Процент громкости -->
+                	<input id="slider" type="range" oninput="SetVolume();" /><!-- Линия слайдера -->
+                    <div id="result">10%</div> <!-- Процент громкости -->
                         <!-- <input type="range" min="1" max="100" step="1" name="volume" ondragend="SetVolume();"> --> <!-- Недоползунок -->
                 </div>
             </div>
