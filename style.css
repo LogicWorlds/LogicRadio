@@ -150,6 +150,11 @@ footer {
     margin: auto;
 }
 
+#vk_comments {
+	border-radius: 3px;
+	box-shadow: 0 0 10px #000;
+}
+
 #slider {
     width: 210px;
     margin-left: 20px;
@@ -256,3 +261,4 @@ input[type=range]:focus::-ms-fill-upper {
     border-radius: 20px;
     border: 1px solid #a4a4a4;
 }
+
