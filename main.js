@@ -93,6 +93,15 @@ function playRadio(){
 
 	}
 }
+
+audio.onended = function() {//Фц-я проверки на "не отключился ли плеер в то время, когда ему не нужно было отключаться"
+	if(is_playing) {
+		audio.pause();
+		audio.src = SREAM_URL + '?' + Math.floor(new Date().getTime() / 1000);//Для того, чтобы адрес потока был каждый раз разный
+		audio.play();
+	}
+}
+
 //Ползунок громкости
 SetVolume();
 function SetVolume() {
