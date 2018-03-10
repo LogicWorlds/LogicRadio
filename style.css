@@ -127,6 +127,7 @@ footer {
 }
 .startAnimate {
     animation: playRadio 2s linear;
+    z-index: 0;
 }
 .startPauseAnimation {
     animation: playRadio 0.5s linear reverse;
@@ -156,6 +157,8 @@ footer {
 }
 
 #slider {
+    position: relative;
+    z-index: 1;
     width: 210px;
     margin-left: 20px;
     height: 5px;
