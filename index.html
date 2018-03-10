@@ -11,7 +11,8 @@
         <link rel="stylesheet" href="style.css?v=6"> <!-- Стили -->
         <script src="main.js?v=8" type="text/javascript" defer></script> <!-- Скрипт радио и слайдера -->
         <script type="text/javascript" src="https://vk.com/js/api/openapi.js?152"></script> <!-- скрипт ВК -->
-        <script type="text/javascript"> <!-- Инициализация виджета ВК -->
+                                            <!-- Инициализация виджета ВК -->
+        <script type="text/javascript"> 
               VK.init({apiId: 6221173, onlyWidgets: true});
         </script>
     </head>
@@ -33,42 +34,52 @@
                 </div>
             </nav>
         </header>
-        <div class="container pt-4 pb-1"> <!-- Основной контейнер -->
-            <div id="audio-player" class="row p-3 mx-auto">  <!-- Контейнер с плеером -->
-                <ul id="infoLeft" class="col-lg-5 mt-4"> <!-- Левая сторона -->
+            <!-- Основной контейнер -->
+        <div class="container pt-4 pb-1"> 
+                    <!-- Контейнер с плеером -->
+            <div id="audio-player" class="row w-75 p-3 mx-auto">  
+                    <!-- Левая сторона -->
+                <ul id="infoLeft" class="infoBoxes col-lg-4 mt-4"> 
                     <li class="h-75">
                         Название стрима: <span id="streamName">...</span>
                     </li>
                     <li class="align-text-bottom">
-                        Описание: <span id="serverDescription">...</span>
+                        Описание: <br><span id="serverDescription">...</span>
                     </li>
                 </ul>
-                <div class='col-lg-2 playerBox' onclick="playRadio();"> <!-- Кнопка радио -->
+                    <!-- Кнопка радио -->
+                <div class='col-lg-4 playerBox' onclick="playRadio();"> 
                     <div class="player">
                         <div class='playEffect'></div>
                     </div>
                 </div>
-                <ul id="infoRight" class="d-block col-lg-5 mt-4"> <!-- Правая сторона -->
+                    <!-- Правая сторона -->
+                <ul id="infoRight" class="infoBoxes d-block col-lg-4 mt-4"> 
                     <li class="h-75">
-                        Играет: <span id="currentSong">...</span>
+                        Играет: <br><span id="currentSong">...</span>
                     </li>
                     <li class="">
                         Слушателей: <span id="currentListenersCount">...</span>
                     </li>
                 </ul>
-                <div class="row-lg-6 mx-auto"> <!-- Слайдер громкости -->
-                	<input id="slider" type="range" oninput="SetVolume();" /><!-- Линия слайдера -->
-                    <div id="result">10%</div> <!-- Процент громкости -->
+                    <!-- Слайдер громкости -->
+                <div class="row-lg-6 mx-auto"> 
+                        <!-- Линия слайдера -->
+                	<input id="slider" class="mx-auto" type="range" oninput="SetVolume();" />
+                        <!-- Процент громкости -->
+                    <div id="result">10%</div> 
                 </div>
             </div>
-            <div id="chatBox" class="pt-5"> <!-- Чат -->
+                <!-- Чат -->
+            <div id="chatBox" class="pt-5"> 
                 <div id="vk_comments" class="mx-auto"></div>
                 <script type="text/javascript">
                     VK.Widgets.Comments("vk_comments", {limit: 20, attach: '*'});
                 </script>
             </div>
         </div>
-        <footer class="w-100 text-center text-sm position-relative p-2"> <!-- Подвал -->
+            <!-- Подвал -->
+        <footer class="w-100 text-center text-sm position-relative p-2"> 
             <hr>(C) 2018 LogicWorld
         </footer>
     </body>
