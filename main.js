@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", ready);
 
 var API_URL = "https://logicworld.ru/icecast/status-json.xsl"; //Адрес API
-var audio = new Audio('https://logicworld.ru/icecast/live.mp3'); //Основной поток
-//audio.volume = 0.1; //Default volume
-audio.load();
+var SREAM_URL = "https://logicworld.ru/icecast/live.mp3";	//Основной поток
 var settings = {};
 settings.firstChenel = 0; //Основной канал
 settings.lastChenel  = 1; //Дополнительный канал (для серверного вещания без диджея)
@@ -23,9 +21,9 @@ function syncRadioStart(radioInfo) {
 	}
 	var chenelsInfo = radioInfo['icestats']['source']
 		
-	if(chenelsInfo[settings[chenel]]['stream_start'] == null){
+	if(!chenelsInfo[settings[chenel]]['stream_start']){
 		chenel = 'lastChenel';
-		if(chenelsInfo[settings[chenel]]['stream_start'] == null){
+		if(!chenelsInfo[settings[chenel]]['stream_start']){
 			$('#debug').html('Ни один поток радио не доступен! (Попытка получить название из корня)');
 			chenel = 'noCh';
 		}
@@ -71,22 +69,23 @@ function getServerInfo(){
 }
 
 //Проигрыватель
-audio.load();
-audio.play();
-audio.muted=true;
+var audio = new Audio("");//Инициализируем аудио-плеер
+var is_playing = false;//Конечно.. Можно проверять is_playing == "", но это более понятно
 function playRadio(){
-	if(audio.muted) {
-		audio.muted=false;
-		$('.player').addClass('pause');
+	if(!is_playing) {//Не пауза? Значит загружаем и запускаем поток
+		is_playing = true;
+		audio.src = SREAM_URL + '?' + Math.floor(new Date().getTime() / 1000);//Для того, чтобы адрес потока был каждый раз разный
+		audio.play();
+		$('.player').addClass('pause');//Всякие анимашки
+		$('.playEffect').removeClass('startPauseAnimation');
+		$('.playEffect').addClass('startAnimate');
+		if($('.playEffect').hasClass('startAnimate'))
+			setTimeout("$('.playEffect').removeClass('startAnimate');", 2000);
 
-			$('.playEffect').removeClass('startPauseAnimation');
-			$('.playEffect').addClass('startAnimate');
-			if($('.playEffect').hasClass('startAnimate'))
-				setTimeout("$('.playEffect').removeClass('startAnimate');", 2000);
-
-	} else {
-		audio.muted=true;
-		$('.player').removeClass('pause');
+	} else {//Пауза
+		is_playing = false;
+		audio.src = "data:audio/ogg;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAVFYAAFRWAAABAAgAZGF0YQAAAAA=";//Просто устанавливаем поток на какой-то пустой звук
+		$('.player').removeClass('pause');//Всякие анимашки
 			$('.playEffect').removeClass('startAnimate');
 			$('.playEffect').addClass('startPauseAnimation');
 			if($('.playEffect').hasClass('startPauseAnimation'))
