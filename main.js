@@ -128,7 +128,7 @@ function bgMode() {
 		$('.navColors').css({"background" : "#A5C2D450"});
 	} else {//Ночной
 		$('body').css({"background" : "url('images/bgNight.png') fixed", "background-size" : "auto 100%", "background-position" : "center center"});
-		$('.navColors').css({"background" : "linear-gradient(to right, rgba(255,255,255,1) -30%,rgba(255,255,255,0) 30%)");
+		$('.navColors').css({"background" : "linear-gradient(to right, rgba(255,255,255,1) -30%,rgba(255,255,255,0) 30%)"});
 	}
 	setTimeout("bgMode();", 10000);
 }
