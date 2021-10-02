@@ -11,9 +11,30 @@ body {
     min-width: 415px;
 }
 
+.back-gradient {
+  background: linear-gradient(137.42deg, #000 0%, #39330f 50.43%, #E65757 100%);
+  background-size: 300% 300%;
+  animation: gradient 20s ease infinite;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -1;
+  opacity: 0.8;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 .navColors {
     background-color: #A5C2D450; /* #A5C2D440 */
-    box-shadow: 0 5px 10px #A6A6A670; /* #FFFFFF90 */
 }
 
 .img-h-80 {
