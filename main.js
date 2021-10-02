@@ -125,10 +125,10 @@ function bgMode() {
 	var now = new Date();
 	if((now.getHours() > 6) && (now.getHours() < 21)) {//Деневной режим
 		$('body').css({"background" : "url('images/bg.png') fixed", "background-size" : "auto 100%", "background-position" : "center center"});
-		$('.navColors').css({"background" : "#A5C2D450", "box-shadow" : "0 5px 10px #A6A6A670"});
+		$('.navColors').css({"background" : "#A5C2D450"});
 	} else {//Ночной
 		$('body').css({"background" : "url('images/bgNight.png') fixed", "background-size" : "auto 100%", "background-position" : "center center"});
-		$('.navColors').css({"background" : "linear-gradient(to right, rgba(255,255,255,1) -30%,rgba(255,255,255,0) 30%)", "box-shadow" : "none"});
+		$('.navColors').css({"background" : "linear-gradient(to right, rgba(255,255,255,1) -30%,rgba(255,255,255,0) 30%)");
 	}
 	setTimeout("bgMode();", 10000);
 }
