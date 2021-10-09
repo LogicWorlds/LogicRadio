@@ -119,17 +119,18 @@ footer {
     margin: auto;
     width: 10em;
     height: 10em;
-    background: url('images/Play.png');
-    background-size: 100% 100%;
-    transition: 0.2s;
+    background: url('images/playpause.png');
+    background-size: 100% auto;
+    transition: box-shadow 0.2s;
     border-radius: 5em;
 }
 .pause {
-    background: url('images/Pause.png');
-    background-size: 100% 100%;
+    background: url('images/playpause.png');
+    background-size: 100% auto;
+    background-position: 100% 100%;
 }
 .player:hover {
-    box-shadow: 0 0 10px #69d84d;
+    box-shadow: 0 0 10px #797979;
 }
 .player:active {
     width: 9em;
