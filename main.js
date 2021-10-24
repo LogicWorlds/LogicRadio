@@ -80,6 +80,7 @@ function playRadio(){
 		is_playing = true;
 		audio.src = SREAM_URL + '?' + Math.floor(new Date().getTime() / 1000);//Для того, чтобы адрес потока был каждый раз разный
 		audio.play();
+        timeWatcher();
 		$('.player').addClass('pause');//Всякие анимашки
 		$('.playEffect').removeClass('startPauseAnimation');
 		$('.playEffect').addClass('startAnimate');
@@ -98,11 +99,27 @@ function playRadio(){
 	}
 }
 
+function restartStream() {
+    console.log("[TimeWatcher] Restarting stream.");
+    audio.pause();
+    audio.src = SREAM_URL + '?' + Math.floor(new Date().getTime() / 1000);//Для того, чтобы адрес потока был каждый раз разный
+    audio.play();
+}
+
+time = -1;
+function timeWatcher() {
+    if (time == audio.currentTime){
+        restartStream();
+    } else {
+        time = audio.currentTime;
+    }
+    if (is_playing)
+        setTimeout("timeWatcher();", 1000);
+}
+
 audio.onended = function() {//Фц-я проверки на "не отключился ли плеер в то время, когда ему не нужно было отключаться"
 	if(is_playing) {
-		audio.pause();
-		audio.src = SREAM_URL + '?' + Math.floor(new Date().getTime() / 1000);//Для того, чтобы адрес потока был каждый раз разный
-		audio.play();
+		restartStream();
 	}
 }
 
