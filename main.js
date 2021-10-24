@@ -114,7 +114,7 @@ function timeWatcher() {
         time = audio.currentTime;
     }
     if (is_playing)
-        setTimeout("timeWatcher();", 1000);
+        setTimeout("timeWatcher();", settings['updateTime']);
 }
 
 audio.onended = function() {//Фц-я проверки на "не отключился ли плеер в то время, когда ему не нужно было отключаться"
