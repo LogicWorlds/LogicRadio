@@ -74,10 +74,8 @@ function getServerInfo(){
 
 //Проигрыватель
 var audio = new Audio("");//Инициализируем аудио-плеер
-var is_playing = false;//Конечно.. Можно проверять is_playing == "", но это более понятно
 function playRadio(){
-	if(!is_playing) {//Не пауза? Значит загружаем и запускаем поток
-		is_playing = true;
+	if(audio.paused) {//Не пауза? Значит загружаем и запускаем поток
 		audio.src = SREAM_URL + '?' + Math.floor(new Date().getTime() / 1000);//Для того, чтобы адрес потока был каждый раз разный
 		audio.play();
         timeWatcher();
@@ -88,7 +86,7 @@ function playRadio(){
 			setTimeout("$('.playEffect').removeClass('startAnimate');", 2000);
 
 	} else {//Пауза
-		is_playing = false;
+		audio.pause();
 		audio.src = "data:audio/ogg;base64,0";//Просто устанавливаем поток на какой-то пустой звук
 		$('.player').removeClass('pause');//Всякие анимашки
 			$('.playEffect').removeClass('startAnimate');
@@ -99,6 +97,7 @@ function playRadio(){
 	}
 }
 
+
 function restartStream() {
     console.log("[TimeWatcher] Restarting stream.");
     audio.pause();
@@ -106,22 +105,27 @@ function restartStream() {
     audio.play();
 }
 
-time = -1;
+var time = 0;
 function timeWatcher() {
-    if (time == audio.currentTime){
+    if (audio.paused)
+        return;
+    if (time == audio.currentTime && audio.currentTime != 0){
         restartStream();
     } else {
         time = audio.currentTime;
     }
-    if (is_playing)
-        setTimeout("timeWatcher();", settings['updateTime']);
+    setTimeout("timeWatcher();", 500);
 }
 
 audio.onended = function() {//Фц-я проверки на "не отключился ли плеер в то время, когда ему не нужно было отключаться"
-	if(is_playing) {
+	if(!audio.paused) {
+		console.log("[TimeWatcher] Stream end found.");
 		restartStream();
 	}
+	playRadio();
 }
+
+audio.onpause = function() {playRadio()}
 
 //Ползунок громкости
 SetVolume();
