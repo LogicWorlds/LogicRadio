@@ -8,6 +8,27 @@ settings.lastChenel  = 1; //Дополнительный канал (для се
 settings.updateTime   = 10000; //Интервал обновления информации (1000 - 1 секкунда)
 settings.debug = false; //Отладка
 
+console.log("\
+ ██▓     ▒█████    ▄████  ██▓ ▄████▄   ██▀███   ▄▄▄      ▓█████▄  ██▓ ▒█████  \n\
+▓██▒    ▒██▒  ██▒ ██▒ ▀█▒▓██▒▒██▀ ▀█  ▓██ ▒ ██▒▒████▄    ▒██▀ ██▌▓██▒▒██▒  ██▒\n\
+▒██░    ▒██░  ██▒▒██░▄▄▄░▒██▒▒▓█    ▄ ▓██ ░▄█ ▒▒██  ▀█▄  ░██   █▌▒██▒▒██░  ██▒\n\
+▒██░    ▒██   ██░░▓█  ██▓░██░▒▓▓▄ ▄██▒▒██▀▀█▄  ░██▄▄▄▄██ ░▓█▄   ▌░██░▒██   ██░\n\
+░██████▒░ ████▓▒░░▒▓███▀▒░██░▒ ▓███▀ ░░██▓ ▒██▒ ▓█   ▓██▒░▒████▓ ░██░░ ████▓▒░\n\
+░ ▒░▓  ░░ ▒░▒░▒░  ░▒   ▒ ░▓  ░ ░▒ ▒  ░░ ▒▓ ░▒▓░ ▒▒   ▓▒█░ ▒▒▓  ▒ ░▓  ░ ▒░▒░▒░ \n\
+░ ░ ▒  ░  ░ ▒ ▒░   ░   ░  ▒ ░  ░  ▒     ░▒ ░ ▒░  ▒   ▒▒ ░ ░ ▒  ▒  ▒ ░  ░ ▒ ▒░ \n\
+  ░ ░   ░ ░ ░ ▒  ░ ░   ░  ▒ ░░          ░░   ░   ░   ▒    ░ ░  ░  ▒ ░░ ░ ░ ▒  \n\
+    ░  ░    ░ ░        ░  ░  ░ ░         ░           ░  ░   ░     ░      ░ ░  \n\
+                             ░                            ░                   \n\
+");
+
+function log(msg, type='log') {
+	if(settings['debug'] == true && type == 'debug') {
+		console.log('[Debug] [LogicRadio]', msg);
+	} else if (type != 'debug') {
+		console.log('[LogicRadio]', msg);
+	}
+}
+
 function ready(){
 	Replaces("#streamName", "Loading...");
 	Replaces("#currentSong", "Loading...");
@@ -66,49 +87,80 @@ function getServerInfo(){
 		dataType: 'json',
 		beforeSend: function () {settings['debug']?$('#debug').html("LOADING..."):false;},
 		success: function (data) {
-			settings['debug']?console.log(data):'';
+			log(data, 'debug');
 			syncRadioStart(data);
 		}
 	});
 }
 
+function setStreamUrl() {
+	audio.src = SREAM_URL + '?' + Math.floor(new Date().getTime() / 1000);//Для того, чтобы адрес потока был каждый раз разный
+}
+
 //Проигрыватель
 var audio = new Audio("");//Инициализируем аудио-плеер
+var is_play = false;
+setStreamUrl();
 function playRadio(){
 	if(audio.paused) {//Не пауза? Значит загружаем и запускаем поток
-		audio.src = SREAM_URL + '?' + Math.floor(new Date().getTime() / 1000);//Для того, чтобы адрес потока был каждый раз разный
 		audio.play();
-        timeWatcher();
+
+	} else {//Пауза
+		audio.pause();
+		
+
+	}
+}
+
+audio.onplay = ()=>{
+	if(is_play)
+		return;
+	is_play = true;
+	if(audio.currentTime > 1 && audio.currentTime != Infinity) // Ставим на конец файла
+		audio.currentTime = audio.duration-0.1;
+	log('Play.');
+	timeWatcher();
+	log('TimeWatcher started.')
 		$('.player').addClass('pause');//Всякие анимашки
 		$('.playEffect').removeClass('startPauseAnimation');
 		$('.playEffect').addClass('startAnimate');
 		if($('.playEffect').hasClass('startAnimate'))
 			setTimeout("$('.playEffect').removeClass('startAnimate');", 2000);
+}
 
-	} else {//Пауза
-		audio.pause();
-		audio.src = "data:audio/ogg;base64,0";//Просто устанавливаем поток на какой-то пустой звук
+audio.pause = ()=>{
+	if(!is_play)
+		return;
+	is_play = false;
+	log('Pause.');
+	audio.src = "data:audio/ogg;base64,0";//Просто устанавливаем поток на какой-то пустой звук
+	setStreamUrl();
 		$('.player').removeClass('pause');//Всякие анимашки
 			$('.playEffect').removeClass('startAnimate');
 			$('.playEffect').addClass('startPauseAnimation');
 			if($('.playEffect').hasClass('startPauseAnimation'))
 				setTimeout("$('.playEffect').removeClass('startPauseAnimation');", 500);
-
-	}
 }
 
+//Для мобильных устройств (управление кнопками в шторке уведомлений)
+//audio.onpause = ()=>{
+//	audio.pause();
+//}
 
 function restartStream() {
-    console.log("[TimeWatcher] Restarting stream.");
+    log('Restarting stream.');
     audio.pause();
-    audio.src = SREAM_URL + '?' + Math.floor(new Date().getTime() / 1000);//Для того, чтобы адрес потока был каждый раз разный
+    setStreamUrl();
     audio.play();
 }
 
 var time = 0;
 function timeWatcher() {
-    if (audio.paused)
+    if (audio.paused) {
+		log('TimeWatcher stoped.')
         return;
+	}
+	log("[TW] " + time + " " + audio.currentTime, 'debug');
     if (time == audio.currentTime && audio.currentTime != 0){
         restartStream();
     } else {
@@ -119,13 +171,11 @@ function timeWatcher() {
 
 audio.onended = function() {//Фц-я проверки на "не отключился ли плеер в то время, когда ему не нужно было отключаться"
 	if(!audio.paused) {
-		console.log("[TimeWatcher] Stream end found.");
+		log("Stream end found.");
 		restartStream();
 	}
 	playRadio();
 }
-
-audio.onpause = function() {playRadio()}
 
 //Ползунок громкости
 SetVolume();
