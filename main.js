@@ -100,11 +100,11 @@ function setStreamUrl() {
 //Проигрыватель
 var audio = new Audio("");//Инициализируем аудио-плеер
 var is_play = false;
-setStreamUrl();
 function playRadio(){
 	if(audio.paused) {//Не пауза? Значит загружаем и запускаем поток
+		audio.preload = true;
+		setStreamUrl();
 		audio.play();
-
 	} else {//Пауза
 		audio.pause();
 		
@@ -116,8 +116,8 @@ audio.onplay = ()=>{
 	if(is_play)
 		return;
 	is_play = true;
-	if(audio.currentTime > 1 && audio.currentTime != Infinity) // Ставим на конец файла
-		audio.currentTime = audio.duration-0.1;
+	if(audio.currentTime > 3 && audio.currentTime != Infinity) // Ставим на конец файла
+		audio.currentTime = audio.duration-3;
 	log('Play.');
 	timeWatcher();
 	log('TimeWatcher started.')
@@ -134,7 +134,6 @@ audio.pause = ()=>{
 	is_play = false;
 	log('Pause.');
 	audio.src = "data:audio/ogg;base64,0";//Просто устанавливаем поток на какой-то пустой звук
-	setStreamUrl();
 		$('.player').removeClass('pause');//Всякие анимашки
 			$('.playEffect').removeClass('startAnimate');
 			$('.playEffect').addClass('startPauseAnimation');
@@ -151,7 +150,8 @@ function restartStream() {
     log('Restarting stream.');
     audio.pause();
     setStreamUrl();
-    audio.play();
+	audio.preload = true;
+    setTimeout(() => { audio.play(); }, 2000);
 }
 
 var time = 0;
@@ -161,7 +161,7 @@ function timeWatcher() {
         return;
 	}
 	log("[TW] " + time + " " + audio.currentTime, 'debug');
-    if (time == audio.currentTime && audio.currentTime != 0){
+    if (time == audio.currentTime && audio.currentTime != 0 || audio.ended) {
         restartStream();
     } else {
         time = audio.currentTime;
@@ -178,9 +178,15 @@ audio.onended = function() {//Фц-я проверки на "не отключи
 }
 
 //Ползунок громкости
+// Вспоминаем его значение
+localVolume = localStorage.getItem('radioVolume');
+if (localVolume !== null) {
+	document.getElementById("slider").value = localVolume;
+}
 SetVolume();
 function SetVolume() {
 	var inpRange = document.getElementById("slider").value;
+	localStorage.setItem('radioVolume', inpRange);
 	audio.volume = inpRange / 100;
 	$('#result').html(inpRange + '%');
 }
