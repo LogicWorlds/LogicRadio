@@ -7,14 +7,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> <!-- Bootstrap -->
         <script src="jquery-3.3.1.min.js"></script> <!-- jquery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> <!-- Bootstrap script -->
-        <link rel="stylesheet" href="style.css?v=10"> <!-- Стили -->
-        <script src="main.js?v=14.8" type="text/javascript" defer></script> <!-- Скрипт радио и слайдера -->
-        <script type="text/javascript" src="https://vk.com/js/api/openapi.js?152"></script> <!-- скрипт ВК (для комментариев) -->
-                                            <!-- Инициализация виджета ВК -->
-        <script type="text/javascript">
-              VK.init({apiId: 6221173, onlyWidgets: true});
-        </script>
+        <script src="bootstrap.min.js"crossorigin="anonymous"></script> <!-- Bootstrap script -->
+        <link rel="stylesheet" href="style.css?v=10.2"> <!-- Стили -->
+        <script src="main.js?v=15.1.6" type="text/javascript" defer></script> <!-- Скрипт радио и слайдера -->
     </head>
     <body>
         <div class="back-gradient"></div>
@@ -71,17 +66,10 @@
                     <div id="result">10%</div>
                 </div>
             </div>
-                <!-- Чат -->
-            <div id="chatBox" class="pt-5">
-                <div id="vk_comments" class="mx-auto"></div>
-                <script type="text/javascript">
-                    VK.Widgets.Comments("vk_comments", {limit: 20, attach: '*'});
-                </script>
-            </div>
         </div>
             <!-- Подвал -->
         <footer class="w-100 text-center text-sm position-relative p-2">
-            © 2021 LogicWorld
+            © <script>document.write(new Date().getFullYear())</script> LogicWorld
         </footer>
     </body>
 </html>
