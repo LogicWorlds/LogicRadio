@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", ready);
 
-var API_URL = "https://logicworld.ru/icecast/status-json.xsl"; //Адрес API
-var SREAM_URL = "https://logicworld.ru/icecast/live.mp3";	//Основной поток
+var API_URL = "https://logixy.net/icecast/status-json.xsl"; //Адрес API
+var SREAM_URL = "https://logixy.net/icecast/live.mp3";	//Основной поток
 var settings = {};
 settings.firstChenel = 0; //Основной канал
 settings.lastChenel  = 1; //Дополнительный канал (для серверного вещания без диджея)
